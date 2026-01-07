@@ -1,0 +1,36 @@
+### Criar livro
+POST http://localhost:8080/api/books
+Content-Type: application/json
+
+{
+  "title": "Clean Code",
+  "author": "Robert C. Martin",
+  "isbn": "9780132350884",
+  "publisher": "Prentice Hall",
+  "publishedDate": "2008-08-01"
+}
+
+###
+
+### Listar livros
+GET http://localhost:8080/api/books
+
+###
+
+### Buscar livro por ID
+GET http://localhost:8080/api/books/1
+
+###
+
+### Atualizar livro
+PUT http://localhost:8080/api/books/1
+Content-Type: application/json
+
+{
+  "publisher": "Pearson"
+}
+
+###
+
+### Excluir livro
+DELETE http://localhost:8080/api/books/1

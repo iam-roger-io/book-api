@@ -1,0 +1,16 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: "book-api"
+  annotations:
+    backstage.io/kubernetes-id: "book-api"
+    backstage.io/kubernetes-namespace: "book-api"
+  tags:
+    - java
+spec: 
+  type: service       
+  lifecycle: production 
+  owner: user:rosantos
+  system: integrador-sp
+  providesApis:
+      - book-api-definition

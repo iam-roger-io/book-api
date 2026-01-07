@@ -1,0 +1,307 @@
+{
+    "openapi": "3.0.1",
+    "info": {
+        "title": "Book API",
+        "description": "API REST para cadastro e gerenciamento de livros",
+        "contact": {
+            "name": "Red Hat Consulting Brazil",
+            "url": "https://www.redhat.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "https://www.apache.org/licenses/LICENSE-2.0"
+        },
+        "version": "v1"
+    },
+    "servers": [
+        {
+            "url": "https://book-api-java-apps.apps.bravo2.lab.redhat.internal",
+            "description": "Generated server url"
+        }
+    ],
+    "tags": [
+        {
+            "name": "Books",
+            "description": "Operações de cadastro e gerenciamento de livros"
+        }
+    ],
+    "paths": {
+        "/api/books/{id}": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Consultar livro por ID",
+                "description": "Retorna os dados de um livro específico",
+                "operationId": "get",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Livro encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Livro não encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Atualizar livro",
+                "description": "Atualiza os dados de um livro existente",
+                "operationId": "update",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BookUpdateRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "description": "Livro atualizado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookResponse"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Livro não encontrado",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Excluir livro",
+                "description": "Remove um livro do cadastro",
+                "operationId": "delete",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int64"
+                        }
+                    }
+                ],
+                "responses": {
+                    "204": {
+                        "description": "Livro removido com sucesso"
+                    },
+                    "404": {
+                        "description": "Livro não encontrado"
+                    }
+                }
+            }
+        },
+        "/api/books": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Listar livros",
+                "description": "Retorna a lista de todos os livros cadastrados",
+                "operationId": "list",
+                "responses": {
+                    "200": {
+                        "description": "Lista de livros retornada com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/BookResponse"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Cadastrar livro",
+                "description": "Cadastra um novo livro",
+                "operationId": "create",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/BookCreateRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "201": {
+                        "description": "Livro criado com sucesso",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookResponse"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Dados inválidos",
+                        "content": {
+                            "*/*": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/BookResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BookUpdateRequest": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "maxLength": 200,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "author": {
+                        "maxLength": 120,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "isbn": {
+                        "maxLength": 40,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "publishedDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "publisher": {
+                        "maxLength": 80,
+                        "minLength": 0,
+                        "type": "string"
+                    }
+                }
+            },
+            "BookResponse": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer",
+                        "format": "int64"
+                    },
+                    "title": {
+                        "type": "string"
+                    },
+                    "author": {
+                        "type": "string"
+                    },
+                    "isbn": {
+                        "type": "string"
+                    },
+                    "publishedDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "publisher": {
+                        "type": "string"
+                    }
+                }
+            },
+            "BookCreateRequest": {
+                "required": [
+                    "author",
+                    "title"
+                ],
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "maxLength": 200,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "author": {
+                        "maxLength": 120,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "isbn": {
+                        "maxLength": 40,
+                        "minLength": 0,
+                        "type": "string"
+                    },
+                    "publishedDate": {
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "publisher": {
+                        "maxLength": 80,
+                        "minLength": 0,
+                        "type": "string"
+                    }
+                }
+            }
+        }
+    }
+}
