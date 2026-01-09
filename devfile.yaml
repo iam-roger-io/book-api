@@ -14,6 +14,10 @@ components:
   - name: tools
     container:
       image: registry.redhat.io/devspaces/udi-rhel9@sha256:bb5baa05f316944ca6df56ad718c368b248e8f4b2488551549b1b13c4ed5844b
+      endpoints:
+        - name: https-springbt
+          targetPort: 8080
+          protocol: http      
 commands:
   - id: setup-java-21
     exec:
