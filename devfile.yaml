@@ -14,4 +14,13 @@ components:
   - name: tools
     container:
       image: registry.redhat.io/devspaces/udi-rhel9@sha256:bb5baa05f316944ca6df56ad718c368b248e8f4b2488551549b1b13c4ed5844b
-
+commands:
+  - id: set-java-21
+    exec:
+      component: tools
+      commandLine: |
+        sudo alternatives --set java /usr/lib/jvm/java-21-openjdk/bin/java
+        java -version
+      group:
+        kind: build
+        isDefault: true
