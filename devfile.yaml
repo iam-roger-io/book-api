@@ -1,0 +1,35 @@
+schemaVersion: 2.2.2
+metadata:
+  name: sb-book-api
+  displayName: Spring Boot®
+  description: Java application using Spring Boot® and OpenJDK 21
+  icon: https://raw.githubusercontent.com/devfile-samples/devfile-stack-icons/main/spring.svg
+  tags:
+    - Java
+    - Spring
+  projectType: springboot
+  language: Java
+  version: 1.4.0
+components:
+  - name: tools
+    container:
+      image: registry.redhat.io/devspaces/udi-rhel9@sha256:bb5baa05f316944ca6df56ad718c368b248e8f4b2488551549b1b13c4ed5844b
+      command: ["tail", "-f", "/dev/null"]
+      memoryLimit: 500Mi
+      mountSources: true
+      endpoints:
+        - name: https-springbt
+          targetPort: 8080
+          protocol: https
+        - exposure: none
+          name: debug
+          targetPort: 5858
+      volumeMounts:
+        - name: m2
+          path: /home/user/.m2
+      env:
+        - name: DEBUG_PORT
+          value: "5858"
+  - name: m2
+    volume:
+      size: 3Gi
