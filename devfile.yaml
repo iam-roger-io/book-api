@@ -14,3 +14,6 @@ components:
   - name: tools
     container:
       image: registry.redhat.io/devspaces/udi-rhel9@sha256:bb5baa05f316944ca6df56ad718c368b248e8f4b2488551549b1b13c4ed5844b
+      env:
+        - name: JAVA_HOME
+          value: /usr/lib/jvm/java-21-openjdk
