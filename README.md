@@ -13,9 +13,9 @@ mvn -DskipTests spring-boot:run
 - http://localhost:8080/v3/api-docs.yaml
 
 
-# Chamadas para teste
+## Chamadas para teste
 
-Adicionar um livro
+### Adicionar um livro
 ``` 
 curl -X POST http://localhost:8080/api/books \
   -H "Content-Type: application/json" \
@@ -27,3 +27,8 @@ curl -X POST http://localhost:8080/api/books \
     "publishedDate": "2008-08-01"
   }'
 ```
+
+### Consultar livros
+```
+curl -X GET http://localhost:8080/api/books
+``
